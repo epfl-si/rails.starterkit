@@ -5,7 +5,6 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler state
-/.bundle
 /Gemfile.lock
 
 # Ignore the default SQLite database.
@@ -34,3 +33,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore things that `./bin/bundle install` installs
+# (we configure Bundler to use that directory like yarn does with
+# `node_modules`):
+/vendor/bundle/
