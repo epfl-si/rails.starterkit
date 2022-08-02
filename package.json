@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "hello_rails",
   "private": "true",
   "dependencies": {
     "esbuild": "^0.15.7"
