@@ -52,6 +52,9 @@ gem "graphiql-rails", group: :development
 # Integrate Rails with esbuild
 gem "jsbundling-rails", "~> 1.0"
 
+# General-purpose OpenID-Connect (OIDC) integration, despite the name
+gem "keycloak-api-rails", "0.11.2"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
