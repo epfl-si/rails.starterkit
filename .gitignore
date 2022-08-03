@@ -35,3 +35,6 @@
 # (we configure Bundler to use that directory like yarn does with
 # `node_modules`):
 /vendor/bundle/
+
+# May contain secrets:
+.env
