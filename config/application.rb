@@ -18,5 +18,9 @@ module HelloRails
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.assets.configure do |env|
+      SprocketsRequireInGemExtension::inject_for_javascript(env)
+    end
   end
 end
