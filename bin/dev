@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-if ! foreman version &> /dev/null
-then
-  echo "Installing foreman..."
-  gem install foreman
-fi
+# Bend over backwards for the impatient developer, and install the
+# dependencies on their behalf. This is *not* an attempt to hot-update
+# dependencies while you modify either the `Gemfile` or `package.json`
+# files:
+[ -d vendor/bundle ] || ./bin/bundle
+[ -d node_modules ] || yarn
 
-foreman start -f Procfile.dev "$@"
+cd "$(dirname "$0")/.."
+node_modules/.bin/concurrently -c red,blue -n puma,esbuild "./bin/rails server" "yarn build --watch"
