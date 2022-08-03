@@ -38,3 +38,8 @@
 
 # May contain secrets:
 .env
+
+# Downloaded / generated JavaScript stuff:
+/node_modules
+/app/assets/builds/*
+!/app/assets/builds/.keep
