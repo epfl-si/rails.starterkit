@@ -1,0 +1,5 @@
+# OpenID Connect (OIDC) configuration for the app
+# Available as `Rails.application.config_for(:oidc)`
+development:
+  serverUrl: <%= ENV.fetch("OIDC_SERVER_URL") { "http://localhost:8080" } %>
+  realm: <%= ENV.fetch("OIDC_REALM_ID") { "rails" } %>

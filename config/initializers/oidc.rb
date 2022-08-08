@@ -1,7 +1,10 @@
 Keycloak.configure do |config|
-  config.server_url = ENV.fetch("OIDC_SERVER_URL") { "http://localhost:8080" }
-  config.realm_id   = ENV.fetch("OIDC_REALM_ID") { "master" }
   config.logger     = Rails.logger
+
+  oidc = Rails.application.config_for(:oidc)  # From config/oidc.yml
+  config.server_url = oidc.serverUrl
+  config.realm_id   = oidc.realm
+
   config.skip_paths = {
     post:   [/^(?!\/?graphql)/],
     get:    [/.?/]
