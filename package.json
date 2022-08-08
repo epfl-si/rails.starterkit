@@ -3,8 +3,10 @@
   "private": "true",
   "dependencies": {
     "esbuild": "^0.14.51",
+    "keycloak-js": "^19.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "use-async-effect": "^2.2.6"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"
