@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 import { useAsyncEffect } from "use-async-effect";
 import { useTimeout } from "../../lib/use_hooks";
 import { OIDCConfig } from "../../interfaces/openid_configuration";
-import Keycloak from "keycloak-js";
+import { OpenIDConnect } from "../../lib/openid_connect";
 
 interface LoginButtonProps extends OIDCConfig {
   debug?: boolean;
@@ -28,57 +28,34 @@ export const LoginButton = function({ debug, realm, serverUrl, clientId,
   const renew = useTimeout();
 
   useAsyncEffect (async (isActive) => {
-    const kc = new Keycloak({ realm, clientId, url: serverUrl });
+    const kc = new OpenIDConnect(
+      { debug, realm, clientId, serverUrl, minValiditySeconds },
+      { setTimeout: renew.start, clearTimeout: renew.stop }
+    );
     kcActions.current = kc;
 
-    function changeToken(token: string|undefined, error?: string|Error) {
+    function onChangeToken (token: string) {
       if (! isActive()) {
         // Too late! React doesn't care anymore.
         return;
       }
-      setInProgress(false);
       setToken(token);
-      if (error) console.error(error);
-      setLastError(error === undefined ? undefined : `${error}`);
       if (token === undefined) {
         if (onLogout) onLogout();
       } else {
+        setLastError(undefined);
         if (onNewToken) onNewToken({token});
       }
     }
 
-    await kc.init({ enableLogging: !!debug });
-    if (kc.authenticated) {
-      changeToken(kc.token);
-      scheduleRenewal();
-    } else {
-      changeToken(undefined);
+    function onError (error : Error|string) {
+      console.error(error);
+      if (! isActive()) return;
+      setLastError(`${error}`);
     }
 
-    function scheduleRenewal() {
-      const expiresIn = kc.tokenParsed['exp'] - Math.ceil(new Date().getTime() / 1000) + kc.timeSkew;
-      const renewalDelay = expiresIn - minValiditySeconds;
-      if (renewalDelay <= 0) {
-        const error = `${serverUrl} returned a token that expires in ${expiresIn} seconds; minValiditySeconds value of ${minValiditySeconds} is unattainable! Token renewal is disabled.`;
-        console.error(error);
-        changeToken(undefined, error);
-        return;
-      }
-
-      if (debug) {
-        console.debug(`Received token expires in ${expiresIn} seconds, scheduling renewal in ${renewalDelay} seconds.`);
-      }
-      renew.start(async () => {
-        try {
-          await kc.updateToken(-1);
-          changeToken(kc.token);
-          scheduleRenewal();
-        } catch (error) {
-          console.error(error);
-          changeToken(undefined, error);
-        }
-      }, renewalDelay * 1000);
-    }
+    await kc.run({auth: onChangeToken, error: onError});
+    setInProgress(false);
   }, [realm, clientId, serverUrl, minValiditySeconds]);
 
   ///////////////  And now... The button. //////////////
