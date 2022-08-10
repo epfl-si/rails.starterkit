@@ -3,49 +3,79 @@
  */
 import { useState, useRef } from "react";
 import { useAsyncEffect } from "use-async-effect";
+import { useTimeout } from "../../lib/use_hooks";
 import { OIDCConfig } from "../../interfaces/openid_configuration";
 import Keycloak from "keycloak-js";
 
 interface LoginButtonProps extends OIDCConfig {
   debug?: boolean;
-  onLogin?: ({token: string}) => void;
+  onNewToken?: ({token: string}) => void;
   onLogout?: () => void;
+  minValiditySeconds?: number;
 }
 
-export const LoginButton = function({ debug, realm, serverUrl,
-                                      clientId, onLogin, onLogout }
+export const LoginButton = function({ debug, realm, serverUrl, clientId,
+                                  minValiditySeconds, onNewToken, onLogout }
                                     : LoginButtonProps) {
   if (! clientId) clientId = "graphiql/LoginButton";
+  if (! minValiditySeconds) minValiditySeconds = 5;
 
   const [inProgress, setInProgress] = useState<boolean>(true);
   const [token, setToken] = useState<string>();
 
-  function changeToken(token: string|undefined) {
-    setInProgress(false);
-    setToken(token);
-    if (token === undefined) {
-      if (onLogout) onLogout();
-    } else {
-      if (onLogin) onLogin({token});
-    }
-  }
-
   const kcActions = useRef<{login: () => void, logout: () => void}>();
+  const renew = useTimeout();
 
   useAsyncEffect (async (isActive) => {
     const kc = new Keycloak({ realm, clientId, url: serverUrl });
     kcActions.current = kc;
 
+    function changeToken(token: string|undefined) {
+      if (! isActive()) {
+        // Too late! React doesn't care anymore.
+        return;
+      }
+      setInProgress(false);
+      setToken(token);
+      if (token === undefined) {
+        if (onLogout) onLogout();
+      } else {
+        if (onNewToken) onNewToken({token});
+      }
+    }
+
     await kc.init({ enableLogging: !!debug });
-    if (! isActive()) {
-      // Too late! React doesn't care anymore.
-      return;
-    } else if (kc.authenticated) {
+    if (kc.authenticated) {
       changeToken(kc.token);
+      scheduleRenewal();
     } else {
       changeToken(undefined);
     }
-  }, [realm, clientId, serverUrl]);
+
+    function scheduleRenewal() {
+      const expiresIn = kc.tokenParsed['exp'] - Math.ceil(new Date().getTime() / 1000) + kc.timeSkew;
+      const renewalDelay = expiresIn - minValiditySeconds;
+      if (renewalDelay <= 0) {
+        console.error(`${serverUrl} returned a token that expires in ${expiresIn} seconds; minValiditySeconds value of ${minValiditySeconds} is unattainable! Token renewal is disabled.`);
+        changeToken(undefined);
+        return;
+      }
+
+      if (debug) {
+        console.debug(`Received token expires in ${expiresIn} seconds, scheduling renewal in ${renewalDelay} seconds.`);
+      }
+      renew.start(async () => {
+        try {
+          await kc.updateToken(-1);
+          changeToken(kc.token);
+          scheduleRenewal();
+        } catch (e) {
+          console.error(e);
+          changeToken(undefined);
+        }
+        }, renewalDelay * 1000);
+    }
+  }, [realm, clientId, serverUrl, minValiditySeconds]);
 
   ///////////////  And now... The button. //////////////
 

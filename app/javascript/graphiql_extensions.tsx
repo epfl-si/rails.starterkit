@@ -35,7 +35,7 @@ Promise.all([
   ReactDOM.createRoot(aDivForReact).render(
     <LoginButton serverUrl={oidcConfig.serverUrl}
                realm={oidcConfig.realm}
-               onLogin={({ token }) => setGraphQLHeader("Authorization", `Bearer ${token}`)}
+               onNewToken={({ token }) => setGraphQLHeader("Authorization", `Bearer ${token}`)}
                onLogout={() => setGraphQLHeader("Authorization", null)}
       />);
 });
