@@ -21,6 +21,7 @@ export const LoginButton = function({ debug, realm, serverUrl, clientId,
   if (! minValiditySeconds) minValiditySeconds = 5;
 
   const [inProgress, setInProgress] = useState<boolean>(true);
+  const [lastError, setLastError] = useState<string>();
   const [token, setToken] = useState<string>();
 
   const kcActions = useRef<{login: () => void, logout: () => void}>();
@@ -30,13 +31,15 @@ export const LoginButton = function({ debug, realm, serverUrl, clientId,
     const kc = new Keycloak({ realm, clientId, url: serverUrl });
     kcActions.current = kc;
 
-    function changeToken(token: string|undefined) {
+    function changeToken(token: string|undefined, error?: string|Error) {
       if (! isActive()) {
         // Too late! React doesn't care anymore.
         return;
       }
       setInProgress(false);
       setToken(token);
+      if (error) console.error(error);
+      setLastError(error === undefined ? undefined : `${error}`);
       if (token === undefined) {
         if (onLogout) onLogout();
       } else {
@@ -56,8 +59,9 @@ export const LoginButton = function({ debug, realm, serverUrl, clientId,
       const expiresIn = kc.tokenParsed['exp'] - Math.ceil(new Date().getTime() / 1000) + kc.timeSkew;
       const renewalDelay = expiresIn - minValiditySeconds;
       if (renewalDelay <= 0) {
-        console.error(`${serverUrl} returned a token that expires in ${expiresIn} seconds; minValiditySeconds value of ${minValiditySeconds} is unattainable! Token renewal is disabled.`);
-        changeToken(undefined);
+        const error = `${serverUrl} returned a token that expires in ${expiresIn} seconds; minValiditySeconds value of ${minValiditySeconds} is unattainable! Token renewal is disabled.`;
+        console.error(error);
+        changeToken(undefined, error);
         return;
       }
 
@@ -69,11 +73,11 @@ export const LoginButton = function({ debug, realm, serverUrl, clientId,
           await kc.updateToken(-1);
           changeToken(kc.token);
           scheduleRenewal();
-        } catch (e) {
-          console.error(e);
-          changeToken(undefined);
+        } catch (error) {
+          console.error(error);
+          changeToken(undefined, error);
         }
-        }, renewalDelay * 1000);
+      }, renewalDelay * 1000);
     }
   }, [realm, clientId, serverUrl, minValiditySeconds]);
 
@@ -81,9 +85,21 @@ export const LoginButton = function({ debug, realm, serverUrl, clientId,
 
   if (inProgress) {
     return <button className="toolbar-button" title="Please wait..." disabled>⌛</button>;
-  } else if (token === undefined) {
-    return <button className="toolbar-button" title="Log in with OpenID-Connect" onClick={kcActions.current.login}>Login</button>;
-  } else {
-    return <button className="toolbar-button" title="Log out" onClick={kcActions.current.logout}>Log out</button>;
   }
+
+  const action = (token === undefined) ? "Login" : "Logout",
+       label = (lastError === undefined) ? action : [action, <sup>⚠</sup>],
+       tooltip = lastError             ? `${lastError}` :
+                (token === undefined)  ? "Log in with OpenID-Connect" :
+                "Log out";
+  function onClick() {
+    if (! kcActions.current) return;  // Too soon!
+    setInProgress(true);
+    if (token === undefined) {
+      kcActions.current.login();
+    } else {
+      kcActions.current.logout();
+    }
+  }
+  return <button className="toolbar-button" title={tooltip} onClick={onClick}>{label}</button>;
 }
