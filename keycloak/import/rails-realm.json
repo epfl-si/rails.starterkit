@@ -1,0 +1,36 @@
+{
+  "realm" : "rails",
+  "enabled" : true,
+  "users" : [ {
+    "username" : "demo",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "firstName" : "",
+    "lastName" : "",
+    "credentials" : [ {
+      "type" : "password",
+      "userLabel" : "The password is “demo”",
+      "secretData" : "{\"value\":\"IDrfcbpAjHWY4WmcITVgmtzRhQMMmukTRIZf5lKYG8i0R1e6A0uHY/IAGRfytS46Dg9rcJGvNpJqia7Jaw/hoA==\",\"salt\":\"F4uH0S09WnCLXPhzv0dhng==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-rails" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ],
+  "clients" : [ {
+    "clientId" : "graphiql/LoginButton",
+    "baseUrl" : "http://localhost:3000/",
+    "enabled" : true,
+    "redirectUris" : [ "*" ],
+    "webOrigins" : [ "*" ],
+    "standardFlowEnabled" : true,
+    "implicitFlowEnabled" : false,
+    "directAccessGrantsEnabled" : true,
+    "publicClient" : true,
+    "frontchannelLogout" : true,
+    "protocol" : "openid-connect"
+  } ]
+}

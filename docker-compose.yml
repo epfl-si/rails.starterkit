@@ -1,0 +1,44 @@
+# This docker-compose.yml file is intended for development support. It
+# is *not* meant for production.
+
+version: '3'
+name: hellorails
+
+services:
+  # Keycloak is an OpenID-Connect IdP (Identity Provider) that is easy
+  # to set up. It mocks out that feature in the Rails application,
+  # allowing testing with arbitrary users and groups. See further
+  # details on the startup sequence of Keycloak (and the
+  # --import-realm flag) in ./keycloak/README.md
+  keycloak:
+    image: quay.io/keycloak/keycloak
+    command:
+      - start-dev
+      - --import-realm
+    environment:
+      KC_DB: mariadb
+      KC_DB_URL: jdbc:mariadb://mariadb:3306/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: mariadb
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      # Since the Keycloak password is easy to guess, opening up this
+      # port further than localhost is *not* recommended.
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./keycloak/import:/opt/keycloak/data/import
+  # MariaDB is used by Keycloak for persistence. The Rails application
+  # itself uses sqlite in development (which unfortunately, is not an
+  # option for Keycloak at the moment).
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MARIADB_USER: keycloak
+      MARIADB_PASSWORD: mariadb
+      MARIADB_ROOT_PASSWORD: mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+      - ./keycloak/initdb.d:/docker-entrypoint-initdb.d
+volumes:
+  mariadb: {}
