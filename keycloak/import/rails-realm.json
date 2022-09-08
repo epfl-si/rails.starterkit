@@ -19,6 +19,24 @@
     "realmRoles" : [ "default-roles-rails" ],
     "notBefore" : 0,
     "groups" : [ ]
+  }, {
+    "username" : "toto",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "firstName" : "",
+    "lastName" : "",
+    "credentials" : [ {
+      "type" : "password",
+      "userLabel" : "My password",
+      "secretData" : "{\"value\":\"6RQuskUb2DGs3NPbVZBHNw9NvJJi6c2CEk4H6iBZJUNRW4rxetmkYuKpdObKU80wQWBof8CmZW+9MrRBspKwfA==\",\"salt\":\"GTgV50Sf1MDzgwBIMxLaMw==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-rails" ],
+    "notBefore" : 0,
+    "groups" : [ ]
   } ],
   "clients" : [
     {
