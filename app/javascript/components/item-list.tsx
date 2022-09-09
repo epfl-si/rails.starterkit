@@ -33,15 +33,27 @@ const columns = [
 export function ItemList() {
   const { data, loading, error } = useQuery(gql`
 {
-  items {
+  items(first: 10) {
+    nodes {
      id
      title
      description
+     artist {
+        firstName
+        lastName
+        email
+        createdAt
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
   }
 }`);
 
   const table = useReactTable({
-    data : data?.items,
+    data : data?.items?.nodes,
     columns,
     getCoreRowModel: getCoreRowModel(),
   })
