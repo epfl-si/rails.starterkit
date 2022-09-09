@@ -36,15 +36,27 @@ export function ItemList() {
 
   const { loading, data, error } = useGraphQLRequest<{ items: Item[] }>(gql`
 {
-  items {
+  items(first: 10) {
+    nodes {
      id
      title
      description
+     artist {
+        firstName
+        lastName
+        email
+        createdAt
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
   }
 }`);
 
   const table = useReactTable({
-    data: data?.items || [],
+    data : data?.items?.nodes || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   })
