@@ -2,12 +2,16 @@
   "name": "hello_rails",
   "private": "true",
   "dependencies": {
-    "esbuild": "^0.15.7"
+    "esbuild": "^0.15.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"
   },
   "devDependencies": {
+    "@types/react": "^18.0.20",
+    "@types/react-dom": "^18.0.6",
     "concurrently": "^7.3.0"
   }
 }
