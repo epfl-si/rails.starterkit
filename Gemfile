@@ -78,3 +78,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# Used to generate mock data:
+gem "prime", "~> 0.1.2"
