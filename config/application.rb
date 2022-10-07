@@ -22,5 +22,13 @@ module HelloRails
     config.assets.configure do |env|
       SprocketsRequireInGemExtension::inject_for_javascript(env)
     end
+
+    # This is a cookie-free Web app!
+    config.middleware.delete ActionDispatch::Cookies
+    config.middleware.delete ActionDispatch::Session::CookieStore
+    config.session_store :disabled
+    if Rails.env.development?
+      GraphiQL::Rails.config.csrf = false
+    end
   end
 end
