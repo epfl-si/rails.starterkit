@@ -1,0 +1,20 @@
+# OpenID Connect (OIDC) configuration for the app
+# Available as `Rails.application.config_for(:oidc)`
+
+oidc_config: &oidc_config
+  public:
+    # ⚠ Do *not* store secrets below `public`!! The entire contents of
+    # this structure is available to anyone who issues an
+    # unauthenticated GET to `/oidc/config` (see
+    # app/controllers/OIDC/frontend_config_controller.rb)
+    auth_server: <%= ENV.fetch("OIDC_SERVER_URL") { "http://localhost:8080/realms/rails/" } %>
+
+# 12-factor trumps Rails dogma, see
+# https://nebulab.com/blog/12-factor-rails-settings
+# 💡 You want all three aliases, even in dev, otherwise `./bin/rake` won't work!
+development:
+  <<: *oidc_config
+test:
+  <<: *oidc_config
+production:
+  <<: *oidc_config
