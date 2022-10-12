@@ -20,17 +20,32 @@
     "notBefore" : 0,
     "groups" : [ ]
   } ],
-  "clients" : [ {
-    "clientId" : "graphiql/LoginButton",
-    "baseUrl" : "http://localhost:3000/",
-    "enabled" : true,
-    "redirectUris" : [ "*" ],
-    "webOrigins" : [ "*" ],
-    "standardFlowEnabled" : true,
-    "implicitFlowEnabled" : false,
-    "directAccessGrantsEnabled" : true,
-    "publicClient" : true,
-    "frontchannelLogout" : true,
-    "protocol" : "openid-connect"
-  } ]
+  "clients" : [
+    {
+      "clientId" : "graphiql/LoginButton",
+      "baseUrl" : "http://localhost:3000/",
+      "enabled" : true,
+      "redirectUris" : [ "*" ],
+      "webOrigins" : [ "*" ],
+      "standardFlowEnabled" : true,
+      "implicitFlowEnabled" : false,
+      "directAccessGrantsEnabled" : true,
+      "publicClient" : true,
+      "frontchannelLogout" : true,
+      "protocol" : "openid-connect"
+    },
+    {
+      "clientId" : "hello_rails",
+      "baseUrl" : "http://localhost:3000/",
+      "enabled" : true,
+      "redirectUris" : [ "*" ],
+      "webOrigins" : [ "*" ],
+      "standardFlowEnabled" : true,
+      "implicitFlowEnabled" : false,
+      "directAccessGrantsEnabled" : true,
+      "publicClient" : true,
+      "frontchannelLogout" : true,
+      "protocol" : "openid-connect"
+    }
+  ]
 }
