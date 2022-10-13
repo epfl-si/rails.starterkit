@@ -2,8 +2,10 @@
   "name": "hello_rails",
   "private": "true",
   "dependencies": {
+    "@apollo/client": "^3.7.0",
     "@epfl-si/react-appauth": "^0.5.1",
     "esbuild": "^0.15.7",
+    "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "use-async-effect": "^2.2.7"
