@@ -4,6 +4,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.0",
     "@epfl-si/react-appauth": "^0.5.1",
+    "@tanstack/react-table": "^8.5.15",
     "esbuild": "^0.15.7",
     "graphql": "^16.6.0",
     "react": "^18.2.0",
