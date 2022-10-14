@@ -5,10 +5,12 @@
     "@apollo/client": "^3.7.0",
     "@epfl-si/react-appauth": "^0.5.1",
     "@tanstack/react-table": "^8.5.15",
+    "@tanstack/react-virtual": "3.0.0-beta.18",
     "esbuild": "^0.15.7",
     "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.4.0",
     "use-async-effect": "^2.2.7"
   },
   "scripts": {
