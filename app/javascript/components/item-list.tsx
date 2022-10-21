@@ -33,7 +33,7 @@ const columns = [
 export function ItemList() {
   const { data, loading, error } = useQuery(gql`
 query Items ($cursor : String) {
-  items(first: 10, after : $cursor) {
+  items(first: 10000, after : $cursor) {
     nodes {
      id
      title
@@ -84,7 +84,9 @@ query Items ($cursor : String) {
             <tr key={row.id}>
               {row.getVisibleCells().map(cell => (
                 <td key={cell.id}>
+                  <a href="#" onClick={ () => alert() }>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </a>
                 </td>
               ))}
             </tr>
