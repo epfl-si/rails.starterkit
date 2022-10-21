@@ -32,8 +32,8 @@ const columns = [
 
 export function ItemList() {
   const { data, loading, error } = useQuery(gql`
-{
-  items(first: 10) {
+query Items ($cursor : String) {
+  items(first: 10, after : $cursor) {
     nodes {
      id
      title
