@@ -6,6 +6,7 @@ import { OIDCContext, StateEnum, LoginButton, IfOIDCState, LoggedInUser } from "
 
 import { createHttpLink, ApolloClient, InMemoryCache, ApolloProvider, NormalizedCacheObject, } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { relayStylePagination } from '@apollo/client/utilities';
 import { ItemList } from "./item-list";
 import { Loading } from "./spinner";
 
@@ -47,8 +48,16 @@ export function App() {
 
   if (! current.auth) current.auth = new AuthState();
   if (! current.client) current.client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: current.auth.httpLink('/graphql')
+    cache: new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            items: relayStylePagination()
+          }
+        }
+      }
+    }),
+    link: current.auth.httpLink('/graphql'),
   });
 
   return <OIDCContext authServerUrl = { authServerUrl }
