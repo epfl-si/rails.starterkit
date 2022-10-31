@@ -1,7 +1,10 @@
 import * as React from "react";
 import { useAsyncEffect } from "use-async-effect";
 import { fetchOIDCConfig } from "../server/openid_configuration";
-import { OIDCContext, StateEnum, LoginButton, IfOIDCState, LoggedInUser } from "@epfl-si/react-appauth";
+import { OIDCContext, StateEnum, LoginButton, IfOIDCState, LoggedInUser, useOpenIDConnectContext } from "@epfl-si/react-appauth";
+import { GraphQLProvider } from "@epfl-si/react-graphql-simple";
+
+import { ItemList } from "./item-list";
 import { Loading } from "./spinner";
 
 export function App() {
@@ -13,22 +16,18 @@ export function App() {
   });
 
   if (! authServerUrl) return <Loading/>;
+
   return <OIDCContext authServerUrl = { authServerUrl }
                       client = { { clientId: "hello_rails",
-                                   redirectUri: "http://localhost:3000/" } }
-                      onNewToken = { onNewToken }
-                      onLogout = { onLogout }  >
+                                   redirectUri: "http://localhost:3000/" } }>
     <LoginButton inProgressLabel={ <Loading/> }/>
     <IfOIDCState is={ StateEnum.LoggedIn }>
       <p>Hello, <LoggedInUser field="preferred_username" />!</p>
+      <GraphQLProvider endpoint="/graphql" authentication={
+          { bearer: () => useOpenIDConnectContext().accessToken }
+      }>
+        <ItemList/>
+      </GraphQLProvider>
     </IfOIDCState>
     </OIDCContext>;
-}
-
-function onNewToken(token : string) {
-  console.log("Received new access token");
-}
-
-function onLogout() {
-  console.log("Logged out");
 }
