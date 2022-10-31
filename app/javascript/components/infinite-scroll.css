@@ -1,0 +1,10 @@
+.infinite-scroll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bee stripes */
+.infinite-scroll-even {
+  background-color: #e6e4dc;
+}
