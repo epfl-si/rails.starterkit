@@ -40,7 +40,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@epfl-si/react-graphql-simple@npm:^0.4.1":
+"@epfl-si/react-graphql-paginated@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@epfl-si/react-graphql-paginated@npm:0.3.0"
+  dependencies:
+    "@epfl-si/react-graphql-simple": ^0.4.0
+    "@tanstack/react-query": ^4.13.5
+    graphql-request: ^5.0.0
+  peerDependencies:
+    graphql: 14 - 16
+    react: 17 - 19
+  checksum: b1d901842edd45d377a99e98d8d6738fd80c88270480173d8567c605ec4d6cf5e567655e596ce284eb110473eb3fe54d7e6083dd216c58cbf33460da8bfd7700
+  languageName: node
+  linkType: hard
+
+"@epfl-si/react-graphql-simple@npm:^0.4.0, @epfl-si/react-graphql-simple@npm:^0.4.1":
   version: 0.4.1
   resolution: "@epfl-si/react-graphql-simple@npm:0.4.1"
   dependencies:
@@ -120,6 +134,32 @@ __metadata:
   bin:
     sifter: bin/sifter.js
   checksum: feab7dc25722f41852647bf5089ebda45eaff9dedc89d2ac3791429e77d060fcf38c5601fee9786aa513421935efdb5344fa904734be80164ab88dca425f4340
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-core@npm:4.36.1":
+  version: 4.36.1
+  resolution: "@tanstack/query-core@npm:4.36.1"
+  checksum: 47672094da20d89402d9fe03bb7b0462be73a76ff9ca715169738bc600a719d064d106d083a8eedae22a2c22de22f87d5eb5d31ef447aba771d9190f2117ed10
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^4.13.5":
+  version: 4.36.1
+  resolution: "@tanstack/react-query@npm:4.36.1"
+  dependencies:
+    "@tanstack/query-core": 4.36.1
+    use-sync-external-store: ^1.2.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-native: "*"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 1aff0a476859386f8d32253fa0d0bde7b81769a6d4d4d9cbd78778f0f955459a3bdb7ee27a0d2ee7373090f12998b45df80db0b5b313bd0a7a39d36c6e8e51c5
   languageName: node
   linkType: hard
 
@@ -850,6 +890,7 @@ __metadata:
   resolution: "hello_rails@workspace:."
   dependencies:
     "@epfl-si/react-appauth": ^0.13.0
+    "@epfl-si/react-graphql-paginated": ^0.3.0
     "@epfl-si/react-graphql-simple": ^0.4.1
     "@tanstack/react-table": ^8.13.2
     "@types/react": ^18.0.20
@@ -861,6 +902,7 @@ __metadata:
     graphql-request: ^5.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-intersection-observer: ^9.8.1
     use-async-effect: ^2.2.7
   languageName: unknown
   linkType: soft
@@ -1046,6 +1088,19 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 7d323310bea3a91be2965f9468d552f201b1c27891e45ddc2d6b8f717680c95a75ae0bc1e3f5cf41472446a2589a75aed4483aee8169287909fcd59ad149e8cc
+  languageName: node
+  linkType: hard
+
+"react-intersection-observer@npm:^9.8.1":
+  version: 9.8.1
+  resolution: "react-intersection-observer@npm:9.8.1"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+  checksum: 0aec6f3fb51bdcbf0131c8e8b9a6b0c89b835608c908d3236e675db58fa2ddc7128f7b1e7c0761fc5b36384cfdf5edef0f5c3651f900220f6b92a992794700ca
   languageName: node
   linkType: hard
 
@@ -1246,6 +1301,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 81fe96df0e9db68fcf5b63a88307ba09896ddbdb6ea952fb00340d5f9d1393d06f2af4d8aa547b062cac2edaaf4bc383fc30f039054ce93bc9e61298ee52e938
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "use-sync-external-store@npm:1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 5c639e0f8da3521d605f59ce5be9e094ca772bd44a4ce7322b055a6f58eeed8dda3c94cabd90c7a41fb6fa852210092008afe48f7038792fd47501f33299116a
   languageName: node
   linkType: hard
 
