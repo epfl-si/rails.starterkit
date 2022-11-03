@@ -1,0 +1,79 @@
+<%# The top navigation menu, in French %>
+<header role="banner" class="header">
+  <a class="logo" href="#">
+    <%= image_tag "epfl-elements/dist/svg/epfl-logo.svg", :alt => "Logo EPFL, École polytechnique fédérale de Lausanne", :class => "img-fluid" %>
+  </a>
+  <ul aria-hidden="true" class="nav-header d-none d-xl-flex">
+      <li id="menu-item-1">
+            <a class="nav-item" href="https://www.epfl.ch/about/fr/">À propos</a>
+                          </li>
+      <li id="menu-item-2" class="current-menu-item">
+            <a class="nav-item" href="https://www.epfl.ch/education/fr/">Éducation</a>
+                          </li>
+      <li id="menu-item-3">
+            <a class="nav-item" href="https://www.epfl.ch/research/fr/">Recherche</a>
+                          </li>
+      <li id="menu-item-4">
+            <a class="nav-item" href="https://www.epfl.ch/innovation/fr/">Innovation</a>
+                          </li>
+      <li id="menu-item-5">
+            <a class="nav-item" href="https://www.epfl.ch/schools/fr/">Facultés</a>
+                          </li>
+      <li id="menu-item-6">
+            <a class="nav-item" href="https://www.epfl.ch/campus/fr/">Campus</a>
+                          </li>
+  </ul>
+
+  <div class="dropdown dropright search d-none d-xl-block">
+    <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+      <svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"></use></svg>
+    </a>
+    <form action="#" class="dropdown-menu border-0 p-0">
+      <div class="search-form mt-1 input-group">
+        <label for="search" class="sr-only">Rechercher sur le site</label>
+        <input type="text" class="form-control" name="search" placeholder="Rechercher">
+        <button type="submit" class="d-none d-xl-block btn btn-primary input-group-append">Valider</button></div>
+    </form>
+  </div>
+
+  <form action="#" class="d-xl-none">
+    <a id="search-mobile-toggle" class="search-mobile-toggle searchform-controller" href="#">
+      <svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"></use></svg>
+      <span class="toggle-label sr-only">Afficher / masquer le formulaire de recherche</span>
+    </a>
+    <div class="input-group search-mobile" role="search">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"></use></svg>
+        </span>
+      </div>
+      <label for="search" class="sr-only">Rechercher sur le site</label>
+      <input type="text" class="form-control" name="search" placeholder="Rechercher">
+      <div class="input-group-append">
+        <a id="search-mobile-close" class="search-mobile-close searchform-controller" href="#">
+          <svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg>
+          <span class="toggle-label sr-only">Masquer le formulaire de recherche</span>
+        </a>
+      </div>
+    </div>
+  </form>
+
+  <nav class="nav-lang nav-lang-short ml-auto">
+    <ul>
+      <li>
+        <span class="active" aria-label="Français">FR</span>
+      </li>
+      <li>
+        <a href="#" aria-label="English">EN</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="btn btn-secondary nav-toggle-mobile d-xl-none">
+    <span class="label">Menu</span>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>

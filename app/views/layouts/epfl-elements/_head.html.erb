@@ -1,0 +1,15 @@
+<%# The <head> fragment that makes it so that epfl-elements gets its CSS and JS %>
+<%= javascript_include_tag "jquery/dist/jquery.min.js", "data-turbo-track": "reload", defer: true %>
+<%= stylesheet_link_tag "epfl-elements/dist/css/vendors.min.css", "data-turbo-track": "reload" %>
+<%= javascript_include_tag "epfl-elements/dist/js/vendors.min.js", "data-turbo-track": "reload", defer: true %>
+<%= stylesheet_link_tag "epfl-elements/dist/css/elements.min.css", "data-turbo-track": "reload" %>
+<%= javascript_include_tag "epfl-elements/dist/js/elements.min.js", "data-turbo-track": "reload", defer: true %>
+<script>
+<%# Tell the epfl-elements initializer where to load things: %>
+window.svgPath = "<%= asset_url 'epfl-elements/dist/icons/icons.svg' %>";
+window.featherSvgPath = "<%= asset_url 'epfl-elements/dist/icons/feather-sprite.svg' %>";
+<%# We don't use cookies; disable the cookie banner: %>
+window.addEventListener('load', function() {
+  jQuery.fn.cookieConsent(false);
+});
+</script>
