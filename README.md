@@ -3,8 +3,8 @@
 ## Pre-requisites
 
 You need the following installed on your system to run this application in development mode:
-- Ruby version 3.x
-- Node version 14 or later
+- Ruby version 3.x — 💡 Use [this PPA](https://launchpad.net/~instructure/+archive/ubuntu/ruby) to install it on older versions of Ubuntu Linux
+- Node version 14.16 or later
 - The `yarn` command somehow available in your `$PATH`
 - Docker with the so-called [compose version 2](https://docs.docker.com/compose/)
   - there is a [switch](https://github.com/docker/compose/issues/1123#issuecomment-1129313318) to flip in Docker Desktop for Mac for this.
