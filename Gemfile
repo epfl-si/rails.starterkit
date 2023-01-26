@@ -52,6 +52,10 @@ gem 'dotenv-rails', group: :development
 gem "graphql", "~> 2.0"
 gem "graphiql-rails", group: :development
 
+# Requirements for an OpenID-Connect Resource Server
+gem "rails_warden", "~> 0.6.0"
+gem "warden_openid_bearer", "~> 0.2.2"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
