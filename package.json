@@ -5,7 +5,8 @@
     "epfl-elements": "^4.2.0",
     "esbuild": "^0.15.12",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "use-async-effect": "^2.2.7"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"

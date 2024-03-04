@@ -766,6 +766,7 @@ __metadata:
     esbuild: ^0.15.12
     react: ^18.2.0
     react-dom: ^18.2.0
+    use-async-effect: ^2.2.7
   languageName: unknown
   linkType: soft
 
