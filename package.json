@@ -1,12 +1,17 @@
 {
   "name": "hello_rails",
   "dependencies": {
-    "esbuild": "^0.15.12"
+    "@epfl-si/react-appauth": "^0.13.0",
+    "esbuild": "^0.15.12",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"
   },
   "devDependencies": {
+    "@types/react": "^18.0.20",
+    "@types/react-dom": "^18.0.6",
     "concurrently": "^8.2.2"
   }
 }
