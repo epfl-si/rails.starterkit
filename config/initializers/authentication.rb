@@ -3,6 +3,9 @@ Rails.application.config.middleware.use RailsWarden::Manager do |manager|
   WardenOpenidBearer.configure do |oidc|
     config = Rails.application.config_for(:oidc)  # From config/oidc.yml
     oidc.openid_metadata_url = config[:public][:auth_server].delete_suffix("/") + "/.well-known/openid-configuration"
+    if (cert = config[:public][:auth_server_certificate])
+      oidc.openid_server_certificate = cert
+    end
   end
 
   manager.failure_app = Proc.new { |_env|

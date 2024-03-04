@@ -8,6 +8,11 @@ oidc_config: &oidc_config
     # unauthenticated GET to `/oidc/config` (see
     # app/controllers/OIDC/frontend_config_controller.rb)
     auth_server: <%= ENV.fetch("OIDC_SERVER_URL") { "http://localhost:8080/realms/rails/" } %>
+#    auth_server_certificate: |
+#      -----BEGIN CERTIFICATE-----
+#      MIIBLAHBLAH==
+#      -----END CERTIFICATE-----
+
 
 # 12-factor trumps Rails dogma, see
 # https://nebulab.com/blog/12-factor-rails-settings
