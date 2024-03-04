@@ -40,6 +40,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@epfl-si/react-graphql-simple@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "@epfl-si/react-graphql-simple@npm:0.4.1"
+  dependencies:
+    "@epfl-si/react-appauth": ^0.13.0
+    graphql: ^16.6.0
+    graphql-request: ^5.0.0
+    resolvable-promise: ^3.0.0
+  peerDependencies:
+    graphql: 14 - 16
+    react: 17 - 19
+  checksum: e365e3147e4c0a7700b42fb74d25388a03a994576c3bff6cdc79c33524b0fd39df792f7088a53bc5fb9add7e53421c65ed5191cd61c496315c52160184873f09
+  languageName: node
+  linkType: hard
+
 "@esbuild/android-arm@npm:0.15.18":
   version: 0.15.18
   resolution: "@esbuild/android-arm@npm:0.15.18"
@@ -105,6 +120,25 @@ __metadata:
   bin:
     sifter: bin/sifter.js
   checksum: feab7dc25722f41852647bf5089ebda45eaff9dedc89d2ac3791429e77d060fcf38c5601fee9786aa513421935efdb5344fa904734be80164ab88dca425f4340
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-table@npm:^8.13.2":
+  version: 8.13.2
+  resolution: "@tanstack/react-table@npm:8.13.2"
+  dependencies:
+    "@tanstack/table-core": 8.13.2
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 5a5ae9cf124a19d5b5ba585359fc51e8999d5418df0bdd14acf8e8644355c540d54d7392041ceec514956d54189a1f7bf5a19ec9ae5a27fa93bd556a5b156a75
+  languageName: node
+  linkType: hard
+
+"@tanstack/table-core@npm:8.13.2":
+  version: 8.13.2
+  resolution: "@tanstack/table-core@npm:8.13.2"
+  checksum: 404cb5b1f0976d06c1a560ab895bb85af0846dd2d275a7ab47ca5bb599097b39530cd424259a40668ee6de204b6285fd122cd42b5e501c213a6d464ec45d1f9a
   languageName: node
   linkType: hard
 
@@ -816,6 +850,8 @@ __metadata:
   resolution: "hello_rails@workspace:."
   dependencies:
     "@epfl-si/react-appauth": ^0.13.0
+    "@epfl-si/react-graphql-simple": ^0.4.1
+    "@tanstack/react-table": ^8.13.2
     "@types/react": ^18.0.20
     "@types/react-dom": ^18.0.6
     concurrently: ^8.2.2
@@ -1049,6 +1085,13 @@ __metadata:
   version: 2.0.3
   resolution: "resolvable-promise@npm:2.0.3"
   checksum: 65c905f5df804e17ee8c7227471c50aefb71676c5ad58417780e6e2730804f03465ba1c5b95371d419677cd85331040a8b60a4bfd59feece641b27a41befb9ec
+  languageName: node
+  linkType: hard
+
+"resolvable-promise@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "resolvable-promise@npm:3.0.0"
+  checksum: d3ac26432b8939be9cad29d08518fffb1cc24d57201a3dc7914b8c5616926c434009217131ee69297493bfa2fca9578bb13a08c50d3a8ebb2f339f8703882439
   languageName: node
   linkType: hard
 

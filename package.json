@@ -2,6 +2,8 @@
   "name": "hello_rails",
   "dependencies": {
     "@epfl-si/react-appauth": "^0.13.0",
+    "@epfl-si/react-graphql-simple": "^0.4.1",
+    "@tanstack/react-table": "^8.13.2",
     "epfl-elements": "^4.2.0",
     "esbuild": "^0.15.12",
     "graphql": "^16.6.0",
