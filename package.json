@@ -6,7 +6,7 @@
     "@epfl-si/react-graphql-simple": "^0.4.1",
     "@tanstack/react-table": "^8.13.2",
     "epfl-elements": "^4.2.0",
-    "esbuild": "^0.15.12",
+    "esbuild": "^0.25.0",
     "graphql": "^16.6.0",
     "graphql-request": "^5.0.0",
     "react": "^18.2.0",
